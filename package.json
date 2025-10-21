@@ -1,0 +1,26 @@
+{
+  "name": "freepbx-node-call",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ami-io": "^1.2.1",
+    "asterisk-ami-client": "^1.1.5",
+    "asterisk-manager": "^0.2.0",
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "net": "^1.0.2",
+    "socket.io": "^4.8.1",
+    "sqlite3": "^5.1.7"
+  },
+  "description": ""
+}

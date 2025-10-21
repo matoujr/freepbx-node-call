@@ -1,0 +1,20 @@
+[
+  {
+    "sender": "jow",
+    "recipient": "admin",
+    "content": "Bonjour, comment vas-tu?",
+    "timestamp": "2025-08-08T23:30:15.493Z"
+  },
+  {
+    "sender": "jow",
+    "recipient": "admin",
+    "content": "Bonjour, comment vas-tu?",
+    "timestamp": "2025-08-08T23:30:15.517Z"
+  },
+  {
+    "sender": "admin",
+    "recipient": "jow",
+    "content": "ca va et toi ?",
+    "timestamp": "2025-08-08T23:32:33.620Z"
+  }
+]

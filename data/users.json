@@ -1,0 +1,12 @@
+[
+  {
+    "username": "jow",
+    "email": "jow@gmail.com",
+    "password": "$2b$10$FDWAFlpxAjSOn6Kqn3.i6O5ERYKnld9YbgHrAGhVWnofm15sIARTK"
+  },
+  {
+    "username": "admin",
+    "email": "admin@gmail.com",
+    "password": "$2b$10$qcF4c49HXlk9OmmoinsPB.MiQjq64wtu5g.PcvhSyimjmy1c9DURy"
+  }
+]

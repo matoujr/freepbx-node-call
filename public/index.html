@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Centre de Contact</title>
+    <style>
+:root {
+  --primary-color: #5d5dff; /* Bleu plus vif */
+  --secondary-color: #3b3b9b; /* Bleu foncé */
+  --accent-color: #66d9ef; /* Cyan/bleu clair */
+  --success-color: #2ecc71; /* Vert */
+  --warning-color: #f1c40f; /* Jaune */
+  --error-color: #e74c3c; /* Rouge */
+  --bg-color: #f4f7f6; /* Gris clair */
+  --container-bg-color: #ffffff;
+  --text-color: #2c3e50; /* Gris foncé */
+  --border-color: #dfe6e9;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  padding: 0;
+  margin: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--container-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--secondary-color);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 600;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 10px 0;
+  background: var(--primary-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+  text-decoration: none;
+  padding: 12px 20px;
+  color: white;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover,
+nav a.active {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+section {
+  display: none;
+  margin-top: 20px;
+  padding: 30px;
+  border-radius: 12px;
+  background: var(--container-bg-color);
+  box-shadow: 0 4px 15px var(--shadow-color);
+  animation: fadeIn 0.5s ease-out;
+}
+
+section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1em;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(93, 93, 255, 0.2);
+  outline: none;
+}
+
+button {
+  background: var(--success-color);
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.link {
+  display: block;
+  margin-top: 15px;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.link:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background: #fdfdfd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+th,
+td {
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  text-align: left;
+}
+
+th {
+  background: var(--primary-color);
+  color: white;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+#messages,
+#privateMessages,
+#chatlog {
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  height: 300px;
+  overflow-y: auto;
+  background: #fdfdfd;
+  margin-top: 15px;
+  border-radius: 8px;
+}
+
+.message-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px dotted var(--border-color);
+  background: #ecf0f1;
+  border-radius: 6px;
+}
+
+.message-item strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.message-item .timestamp {
+  font-size: 0.9em;
+  color: #7f8c8d;
+  float: right;
+}
+
+#chatbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--container-bg-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 12px;
+  padding: 15px;
+  width: 320px;
+  box-shadow: 0 8px 20px var(--shadow-color);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+#chatbot #chatInput {
+  margin-bottom: 10px;
+}
+
+#chatbot button {
+  width: auto;
+  padding: 8px 15px;
+  margin-top: 5px;
+  font-size: 0.9em;
+}
+
+#closeChatBtn {
+  background: var(--error-color);
+}
+
+#closeChatBtn:hover {
+  background: #c0392b;
+}
+
+.chat-toggle-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.chat-toggle-button.active {
+  background-color: var(--secondary-color);
+}
+
+#ficheDetails {
+  border: 2px solid var(--success-color) !important;
+  background: #f7fff7 !important;
+  border-radius: 8px !important;
+}
+
+#ficheDetails p strong {
+  color: var(--secondary-color);
+}
+
+/* Styles pour le conteneur flex */
+.flex-container {
+  display: flex;
+  gap: 20px; /* Espace entre les blocs */
+  margin-top: 20px;
+  flex-wrap: wrap; /* Permet aux blocs de passer à la ligne sur les petits écrans */
+}
+
+/* Styles pour les blocs d'information */
+.client-info-block {
+  flex: 1; /* Permet aux blocs de prendre une taille égale */
+  min-width: 300px; /* Taille minimale pour éviter qu'ils ne deviennent trop petits */
+  background: #f8f9fa; /* Couleur de fond légèrement différente pour les blocs */
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+.client-info-block:hover {
+  transform: translateY(-5px); /* Effet au survol pour un rendu plus actif */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.client-info-block h3 {
+  color: #007bff;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+/* Styles pour les listes et les éléments de liste */
+#rappelsClient,
+#rendezVousClient {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#rappelsClient li,
+#rendezVousClient li {
+  padding: 10px 0;
+  border-bottom: 1px dashed #ced4da;
+}
+
+#rappelsClient li:last-child,
+#rendezVousClient li:last-child {
+  border-bottom: none;
+}
+/* Styles pour la page de connexion et d'inscription */
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 450px; /* Taille maximale de la carte */
+  margin: 50px auto;
+  padding: 40px;
+  background: var(--container-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  transition: transform 0.3s ease-in-out;
+}
+
+.auth-card:hover {
+  transform: translateY(-5px); /* Effet de survol subtil */
+}
+
+.auth-card h2 {
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  border-bottom: none; /* Pas de ligne de séparation sur le titre */
+}
+
+/* On peut cibler spécifiquement les inputs du formulaire */
+#login input,
+#register input {
+  width: 100%;
+  max-width: 350px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1em;
+  background: #fdfdfd;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#login input:focus,
+#register input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px rgba(93, 93, 255, 0.2);
+}
+
+/* Styles pour le bouton de connexion */
+#login button,
+#register button {
+  width: 100%;
+  max-width: 350px;
+  padding: 15px;
+  margin-top: 10px;
+  font-size: 1.1em;
+  font-weight: 700;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+#login button:hover,
+#register button:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-card .link {
+  font-size: 0.9em;
+  margin-top: 20px;
+  text-align: center;
+}
+    </style>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+    <h1>Centre de Contact</h1>
+    <nav>
+        <a href="#" onclick="showPage('home')">Accueil</a>
+        <a href="#" onclick="showPage('login')">Connexion</a>
+        <a href="#" onclick="showPage('register')">Inscription</a>
+        <a href="#" onclick="authGuard('messagerie')">Messagerie</a>
+        <a href="#" onclick="authGuard('contacts')">Contacts</a>
+        <a href="#" onclick="authGuard('ficheClient')">Fiche Client</a>
+    </nav>
+
+    <section id="login">
+        <h2>Connexion</h2>
+        <input type="text" placeholder="Nom d'utilisateur" id="loginUsername" />
+        <input type="password" placeholder="Mot de passe" id="loginPassword" />
+        <button onclick="login()">Se connecter</button>
+        <a class="link" href="#" onclick="showPage('register')">Pas encore de compte ? S'inscrire</a>
+    </section>
+
+    <section id="register">
+        <h2>Inscription</h2>
+        <input type="text" placeholder="Nom d'utilisateur" id="registerUsername" />
+        <input type="email" placeholder="Email" id="registerEmail" />
+        <input type="password" placeholder="Mot de passe" id="registerPassword" />
+        <button onclick="register()">S'inscrire</button>
+    </section>
+
+    <section id="home" class="active">
+        <h2>Accueil</h2>
+        <p>Bienvenue dans le centre de contact.</p>
+        <button onclick="callAdvisor()">Appeler un conseiller</button>
+        <p id="callStatus"></p>
+    </section>
+
+    <div id="chatbot">
+        <div id="chatlog"></div>
+        <input type="text" id="chatInput" placeholder="Posez votre question..." />
+        <button onclick="handleChatInput()">Envoyer</button>
+        <button id="closeChatBtn" onclick="closeChat()">Fermer la conversation</button>
+    </div>
+
+    <section id="messagerie">
+        <h2>Messagerie</h2>
+
+        <button class="chat-toggle-button active" onclick="toggleChatMode('general')">Messagerie Générale</button>
+        <button class="chat-toggle-button" onclick="toggleChatMode('private')">Messagerie Privée</button>
+
+        <div id="generalChat" style="display: block;">
+            <h3>Messages Publics</h3>
+            <div id="messages"></div>
+            <textarea id="messageText" placeholder="Écrivez votre message général ici..." rows="4"></textarea><br />
+            <button onclick="sendMessage()">Envoyer le message public</button>
+        </div>
+
+        <div id="privateChat" style="display: none;">
+            <h3>Messages Privés</h3>
+            <div id="privateChatControls">
+                <label for="privateRecipient">Envoyer à :</label>
+                <select id="privateRecipient">
+                    <option value="">Sélectionner un utilisateur</option>
+                </select>
+                <button onclick="openPrivateChat()">Ouvrir conversation</button>
+            </div>
+            <div id="privateMessages"></div>
+            <textarea id="privateMessageText" placeholder="Écrivez votre message privé ici..." rows="4"></textarea><br />
+            <button onclick="sendPrivateMessage()">Envoyer le message privé</button>
+        </div>
+    </section>
+
+    <section id="contacts">
+        <h2>Contacts</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Adresse</th>
+                    <th>Date de naissance</th>
+                    <th>Lieu</th>
+                </tr>
+            </thead>
+            <tbody id="contactList"></tbody>
+        </table>
+    </section>
+
+<section id="ficheClient">
+  <h2>Fiche Client (Appels entrants)</h2>
+  <div id="ficheDetails" style="display: none; border: 2px solid green; padding: 15px; background: #f5fff5;">
+    <p><strong>Nom :</strong> <span id="ficheNom"></span></p>
+    <p><strong>Adresse :</strong> <span id="ficheAdresse"></span></p>
+  </div>
+  <p id="ficheStatus">En attente d'appel...</p>
+
+  <div class="flex-container">
+    <div class="client-info-block">
+      <h3>Rappels Client</h3>
+      <ul id="rappelsClient">
+        </ul>
+    </div>
+    
+    <div class="client-info-block">
+      <h3>Rendez-vous Technicien</h3>
+      <ul id="rendezVousClient">
+        <li>
+          <strong>Nom :</strong> Jow<br />
+          <strong>Date :</strong> 29/07/2025<br />
+          <strong>Heure :</strong> 10:30<br />
+          <strong>Mobile :</strong> 0612345678
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div>
+    <script>
+        let isLoggedIn = false;
+        let currentUser = ''; // Simule l'utilisateur actuellement connecté
+        let currentPrivateRecipient = ''; // L'utilisateur avec qui on a une conversation privée
+        
+        const socket = io('http://localhost:3000');
+        let currentChatbotAction = 'none';
+
+        function showPage(id) {
+            document.querySelectorAll('section').forEach((s) => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if (id === 'messagerie') {
+                loadMessages(); // Chargement des messages généraux
+                // Initialiser le mode chat général par défaut à l'ouverture de la page messagerie
+                toggleChatMode('general'); 
+            }
+            if (id === 'contacts') loadContacts();
+            if (id === 'ficheClient') loadFicheClientData();
+        }
+
+        function authGuard(id) {
+            if (!isLoggedIn) {
+                alert('Veuillez vous connecter pour accéder à cette page.');
+                showPage('login');
+            } else {
+                showPage(id);
+            }
+        }
+
+        async function login() {
+            const user = document.getElementById('loginUsername').value;
+            const pass = document.getElementById('loginPassword').value;
+            try {
+                const res = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: user, password: pass }),
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert('Bienvenue, ' + user + ' !');
+                    isLoggedIn = true;
+                    currentUser = user; // Définir l'utilisateur connecté
+                    socket.emit('userConnected', currentUser); // Indiquer au serveur quel est l'utilisateur connecté
+                    showPage('home');
+                } else {
+                    alert('Échec de la connexion: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Erreur de connexion:', error);
+                alert('Une erreur est survenue lors de la tentative de connexion.');
+            }
+        }
+
+        async function register() {
+            const user = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const pass = document.getElementById('registerPassword').value;
+            try {
+                const res = await fetch('/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: user, email: email, password: pass }),
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert("Inscription réussie, vous pouvez vous connecter.");
+                    showPage('login');
+                } else {
+                    alert("Erreur lors de l'inscription: " + data.message);
+                }
+            } catch (error) {
+                console.error('Erreur d\'inscription:', error);
+                alert('Une erreur est survenue lors de l\'inscription.');
+            }
+        }
+
+        async function callAdvisor() {
+            try {
+                const res = await fetch('/call?from=1001&to=1002');
+                const msg = await res.text();
+                document.getElementById('callStatus').innerText = msg;
+            } catch (err) {
+                console.error(err);
+                document.getElementById('callStatus').innerText = 'Erreur lors de l\'appel.';
+            }
+        }
+
+        // Fonction pour envoyer un message général
+        async function sendMessage() {
+            if (!isLoggedIn) {
+                alert('Veuillez vous connecter pour envoyer des messages.');
+                return;
+            }
+            const messageTextarea = document.getElementById('messageText');
+            const content = messageTextarea.value.trim();
+            if (!content) return;
+
+            const sender = currentUser || 'Utilisateur Anonyme'; 
+
+            try {
+                const response = await fetch('/api/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sender, content })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    messageTextarea.value = ''; // Effacer le champ après l'envoi
+                    // Le Socket.IO se chargera de recharger les messages via 'messageUpdate'
+                } else {
+                    alert('Erreur lors de l\'envoi du message: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Erreur réseau lors de l\'envoi du message:', error);
+                alert('Impossible d\'envoyer le message. Problème de connexion.');
+            }
+        }
+
+        // Fonction pour charger et afficher les messages généraux
+        async function loadMessages() {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML = 'Chargement des messages...';
+
+            try {
+                const response = await fetch('/api/messages');
+                const messages = await response.json();
+                displayMessages(messagesDiv, messages);
+            } catch (error) {
+                console.error('Erreur lors du chargement des messages généraux:', error);
+                messagesDiv.innerHTML = 'Erreur de chargement des messages généraux.';
+            }
+        }
+
+        // Fonction générique pour afficher les messages dans une div donnée
+        function displayMessages(targetDiv, messages) {
+            targetDiv.innerHTML = ''; // Nettoie le contenu précédent
+
+            if (messages.length === 0) {
+                targetDiv.innerHTML = '<p>Aucun message pour le moment.</p>';
+                return;
+            }
+
+            messages.forEach(msg => {
+                const messageItem = document.createElement('div');
+                messageItem.classList.add('message-item');
+                
+                let senderDisplay;
+                let messageContent;
+
+                if (msg.sender === currentUser) {
+                    senderDisplay = 'Vous';
+                } else {
+                    senderDisplay = msg.sender;
+                }
+
+                if (msg.recipient) { // C'est un message privé
+                    if (msg.sender === currentUser) { // Message envoyé par l'utilisateur actuel
+                        messageContent = `<strong>${senderDisplay} (à ${msg.recipient}):</strong> ${msg.content}`;
+                    } else { // Message reçu par l'utilisateur actuel
+                        messageContent = `<strong>${senderDisplay} (privé):</strong> ${msg.content}`;
+                    }
+                } else { // C'est un message général
+                    messageContent = `<strong>${senderDisplay}:</strong> ${msg.content}`;
+                }
+
+                messageItem.innerHTML = `
+                    ${messageContent}
+                    <span class="timestamp">${new Date(msg.timestamp).toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+                `;
+                targetDiv.appendChild(messageItem);
+            });
+            targetDiv.scrollTop = targetDiv.scrollHeight; // Scroll au bas
+        }
+
+        // --- Fonctions pour la messagerie privée ---
+
+        async function populatePrivateRecipientSelect() {
+            const select = document.getElementById('privateRecipient');
+            select.innerHTML = '<option value="">Sélectionner un utilisateur</option>'; // Réinitialiser
+
+            try {
+                const response = await fetch('/api/users'); // Appel à ton endpoint backend
+                const users = await response.json(); // Récupère les utilisateurs (ex: [{username: 'Jean'}, {username: 'Marie'}])
+
+                // Filtrer l'utilisateur actuel et ajouter les options au sélecteur
+                users.forEach(userObj => {
+                    if (userObj.username !== currentUser) { // Ne pas s'afficher soi-même
+                        const option = document.createElement('option');
+                        option.value = userObj.username;
+                        option.textContent = userObj.username;
+                        select.appendChild(option);
+                    }
+                });
+
+                // Si aucun autre utilisateur n'est disponible, afficher un message
+                if (select.options.length === 1) { // Seulement l'option "Sélectionner un utilisateur"
+                    const option = document.createElement('option');
+                    option.value = "";
+                    option.textContent = "Aucun autre utilisateur disponible";
+                    option.disabled = true;
+                    select.appendChild(option);
+                }
+
+            } catch (error) {
+                console.error('Erreur lors du chargement des utilisateurs pour la messagerie privée:', error);
+                select.innerHTML = '<option value="">Erreur de chargement des utilisateurs</option>';
+            }
+        }
+
+        function toggleChatMode(mode) {
+            const generalChat = document.getElementById('generalChat');
+            const privateChat = document.getElementById('privateChat');
+            const generalBtn = document.querySelector('.chat-toggle-button:nth-of-type(1)');
+            const privateBtn = document.querySelector('.chat-toggle-button:nth-of-type(2)');
+
+            if (mode === 'general') {
+                generalChat.style.display = 'block';
+                privateChat.style.display = 'none';
+                generalBtn.classList.add('active');
+                privateBtn.classList.remove('active');
+                loadMessages(); // Recharger les messages généraux
+            } else if (mode === 'private') {
+                if (!isLoggedIn) {
+                    alert('Veuillez vous connecter pour utiliser la messagerie privée.');
+                    toggleChatMode('general'); // Revenir à la messagerie générale
+                    return;
+                }
+                generalChat.style.display = 'none';
+                privateChat.style.display = 'block';
+                generalBtn.classList.remove('active');
+                privateBtn.classList.add('active');
+                
+                populatePrivateRecipientSelect().then(() => {
+                    const select = document.getElementById('privateRecipient');
+                    // Tenter de présélectionner le dernier destinataire si possible
+                    if (currentPrivateRecipient && [...select.options].some(opt => opt.value === currentPrivateRecipient)) {
+                        select.value = currentPrivateRecipient;
+                        loadPrivateMessages(currentUser, currentPrivateRecipient);
+                    } else if (select.options.length > 1 && select.options[1].value) {
+                        // Sinon, sélectionner le premier utilisateur disponible (après l'option vide)
+                        currentPrivateRecipient = select.options[1].value;
+                        select.value = currentPrivateRecipient;
+                        loadPrivateMessages(currentUser, currentPrivateRecipient);
+                    } else {
+                        document.getElementById('privateMessages').innerHTML = '<p>Sélectionnez un utilisateur pour commencer une conversation privée.</p>';
+                    }
+                });
+            }
+        }
+
+        function openPrivateChat() {
+            const recipient = document.getElementById('privateRecipient').value;
+            if (recipient && recipient !== currentUser) {
+                currentPrivateRecipient = recipient;
+                loadPrivateMessages(currentUser, currentPrivateRecipient);
+            } else {
+                alert('Veuillez sélectionner un destinataire valide.');
+            }
+        }
+
+        async function loadPrivateMessages(sender, recipient) {
+            const privateMessagesDiv = document.getElementById('privateMessages');
+            privateMessagesDiv.innerHTML = `Chargement des messages avec ${recipient}...`;
+
+            try {
+                // CORRIGÉ : Utilisation des paramètres de chemin pour l'URL
+                const response = await fetch(`/api/private-messages/${sender}/${recipient}`);
+                const messages = await response.json();
+                displayMessages(privateMessagesDiv, messages);
+            } catch (error) {
+                console.error('Erreur lors du chargement des messages privés:', error);
+                privateMessagesDiv.innerHTML = 'Erreur de chargement des messages privés.';
+            }
+        }
+
+        async function sendPrivateMessage() {
+            if (!isLoggedIn) {
+                alert('Veuillez vous connecter pour envoyer des messages privés.');
+                return;
+            }
+            if (!currentPrivateRecipient) {
+                alert('Veuillez sélectionner un destinataire pour le message privé.');
+                return;
+            }
+
+            const privateMessageTextarea = document.getElementById('privateMessageText');
+            const content = privateMessageTextarea.value.trim();
+            if (!content) return;
+
+            const sender = currentUser; // L'utilisateur connecté est l'expéditeur
+            const recipient = currentPrivateRecipient; // Le destinataire sélectionné
+
+            try {
+                const response = await fetch('/api/private-messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sender, recipient, content })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    privateMessageTextarea.value = ''; // Effacer le champ
+                    // La mise à jour de l'affichage sera gérée par l'événement Socket.IO 'privateMessageUpdate'
+                } else {
+                    alert('Erreur lors de l\'envoi du message privé: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Erreur réseau lors de l\'envoi du message privé:', error);
+                alert('Impossible d\'envoyer le message privé. Problème de connexion.');
+            }
+        }
+
+        // --- Fin des fonctions pour la messagerie privée ---
+
+        function loadContacts() {
+            const contactList = document.getElementById('contactList');
+            contactList.innerHTML = '';
+            for (let i = 1; i <= 10; i++) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>Nom${i}</td><td>Prenom${i}</td><td>Adresse ${i}</td><td>1990-01-${String(
+                    (i % 30) + 1
+                ).padStart(2, '0')}</td><td>Ville${i}</td>`;
+                contactList.appendChild(tr);
+            }
+        }
+
+        function displayRappels(rappels) {
+            const rappelsUl = document.getElementById('rappelsClient');
+            rappelsUl.innerHTML = '';
+            if (rappels.length === 0) {
+                rappelsUl.innerHTML = '<li>Aucun rappel en attente.</li>';
+                return;
+            }
+            rappels.forEach(rappel => {
+                const li = document.createElement('li');
+                li.textContent = `Numéro: ${rappel.numero} (Demandé le: ${new Date(rappel.timestamp).toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })})`;
+                rappelsUl.appendChild(li);
+            });
+        }
+
+        function displayRendezVous(rendezVous) {
+            const rendezVousUl = document.getElementById('rendezVousClient');
+            rendezVousUl.innerHTML = '';
+            if (rendezVous.length === 0) {
+                rendezVousUl.innerHTML = '<li>Aucun rendez-vous planifié.</li>';
+                return;
+            }
+            rendezVous.forEach(rdv => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <b>Nom:</b> ${rdv.nom}<br>
+                    <b>Date:</b> ${rdv.date}<br>
+                    <b>Heure:</b> ${rdv.heure}<br>
+                    <b>Mobile:</b> ${rdv.numero_mobile}<br>
+                    <b>Objet:</b> ${rdv.objet_demande || 'Non spécifié'} (Demandé le: ${new Date(rdv.timestamp).toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })})
+                `;
+                rendezVousUl.appendChild(li);
+            });
+        }
+
+        async function loadFicheClientData() {
+            try {
+                const [rappelsResponse, rdvResponse] = await Promise.all([
+                    fetch('/api/rappels'),
+                    fetch('/api/rendezvous')
+                ]);
+
+                const rappels = await rappelsResponse.json();
+                displayRappels(rappels);
+
+                const rendezVous = await rdvResponse.json();
+                displayRendezVous(rendezVous);
+            } catch (error) {
+                console.error('Erreur lors du chargement des données de la Fiche Client:', error);
+                document.getElementById('rappelsClient').innerHTML = '<li>Erreur de chargement des rappels.</li>';
+                document.getElementById('rendezVousClient').innerHTML = '<li>Erreur de chargement des rendez-vous.</li>';
+            }
+        }
+
+        async function handleChatInput() {
+            const chatInput = document.getElementById('chatInput');
+            const input = chatInput.value.trim();
+            if (!input) return;
+
+            const chatlog = document.getElementById('chatlog');
+            chatlog.innerHTML += `<div><b>Vous:</b> ${input}</div>`; // Ajoute le message de l'utilisateur
+            chatInput.value = '';
+            chatlog.scrollTop = chatlog.scrollHeight;
+
+            // Supprime les boutons d'options initiales si présents
+            const initialOptionsDiv = document.getElementById('initial-bot-options');
+            if (initialOptionsDiv) {
+                initialOptionsDiv.remove();
+            }
+
+            if (currentChatbotAction === 'callbackRequest') {
+                if (!input.match(/^\d{10}$/)) {
+                    chatlog.innerHTML += `<div><b>Bot:</b> Veuillez entrer un numéro de téléphone valide composé de 10 chiffres.</div>`;
+                    chatlog.scrollTop = chatlog.scrollHeight;
+                    return;
+                }
+                try {
+                    const response = await fetch('/api/rappel-client', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ numero: input })
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        chatlog.innerHTML += `<div><b>Bot:</b> Votre demande de rappel a été enregistrée. Un conseiller vous contactera sous peu.</div>`;
+                    } else {
+                        chatlog.innerHTML += `<div><b>Bot:</b> Erreur lors de l'enregistrement de votre demande de rappel : ${data.message}.</div>`;
+                    }
+                } catch (error) {
+                    console.error('Erreur lors de l\'envoi de la demande de rappel:', error);
+                    chatlog.innerHTML += `<div><b>Bot:</b> Une erreur est survenue lors de la communication avec le serveur. Veuillez réessayer.</div>`;
+                }
+                currentChatbotAction = 'none';
+                chatlog.scrollTop = chatlog.scrollHeight;
+                return;
+            }
+
+            if (currentChatbotAction === 'technicianAppointment') {
+                const parts = input.split(',').map(s => s.trim());
+                if (parts.length < 4) {
+                    chatlog.innerHTML += `<div><b>Bot:</b> Veuillez fournir toutes les informations requises : Nom, Date (JJ/MM/AAAA), Heure (HH:MM), Numéro mobile (10 chiffres), et l'Objet de votre demande. (Ex: 'Jean Dupont, 29/07/2025, 10:30, 0612345678, Installation Fibre')</div>`;
+                    chatlog.scrollTop = chatlog.scrollHeight;
+                    return;
+                }
+
+                const rendezvousData = {
+                    nom: parts[0],
+                    date: parts[1],
+                    heure: parts[2],
+                    numero_mobile: parts[3],
+                    objet_demande: parts.slice(4).join(',').trim() || ''
+                };
+
+                const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+                const heureRegex = /^\d{2}:\d{2}$/;
+                const mobileRegex = /^\d{10}$/;
+
+                if (!rendezvousData.date.match(dateRegex) || !rendezvousData.heure.match(heureRegex) || !rendezvousData.numero_mobile.match(mobileRegex)) {
+                    chatlog.innerHTML += `<div><b>Bot:</b> Un ou plusieurs formats sont invalides. Veuillez vérifier la Date (JJ/MM/AAAA), l'Heure (HH:MM) et le Numéro mobile (10 chiffres).</div>`;
+                    chatlog.scrollTop = chatlog.scrollHeight;
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/api/rendezvous-technicien', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(rendezvousData)
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        chatlog.innerHTML += `<div><b>Bot:</b> Votre rendez-vous a été planifié. Un technicien vous contactera au ${rendezvousData.numero_mobile}.</div>`;
+                    } else {
+                        chatlog.innerHTML += `<div><b>Bot:</b> Erreur lors de la planification de votre rendez-vous : ${data.message}.</div>`;
+                    }
+                } catch (error) {
+                    console.error('Erreur lors de l\'envoi de la demande de rendez-vous:', error);
+                    chatlog.innerHTML += `<div><b>Bot:</b> Une erreur est survenue lors de la communication avec le serveur. Veuillez réessayer.</div>`;
+                }
+                currentChatbotAction = 'none';
+                chatlog.scrollTop = chatlog.scrollHeight;
+                return;
+            }
+
+            // Requête standard au chatbot
+            try {
+                const response = await fetch('/chatbot', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: input }),
+                });
+                const data = await response.json();
+                chatlog.innerHTML += `<div><b>Bot:</b> ${data.reply}</div>`; // Ajoute la réponse du bot
+                currentChatbotAction = data.action;
+
+               if (data.action === 'offerQuestion') {
+                setTimeout(() => {
+                const chatlog = document.getElementById('chatlog');
+                chatlog.innerHTML += `
+                <div id="offer-options" style="margin-top: 10px;">
+                    <button onclick="handleBotOption('call')"> OUI</button>
+                    <button onclick="handleBotOption('no_assistance')"> NON</button>
+                </div>
+                `;
+                chatlog.scrollTop = chatlog.scrollHeight;
+                }, 200); // petit délai pour que le message du bot s'affiche avant les boutons
+            }
+
+            } catch (error) {
+                console.error('Erreur de communication avec le chatbot:', error);
+                chatlog.innerHTML += `<div><b>Bot:</b> Désolé, je ne peux pas vous répondre pour le moment.</div>`;
+            }
+            chatlog.scrollTop = chatlog.scrollHeight;
+        }
+
+        function handleBotOption(option) {
+            const chatlog = document.getElementById('chatlog');
+            let response = '';
+
+            const offerOptionsDiv = document.getElementById('offer-options');
+            if (offerOptionsDiv) {
+                offerOptionsDiv.remove(); // Supprime les boutons après la sélection
+            }
+            const initialOptionsDiv = document.getElementById('initial-bot-options');
+            if (initialOptionsDiv) {
+                initialOptionsDiv.remove(); // Supprime les boutons d'options initiales après la sélection
+            }
+
+            // Ajoute la réponse de l'utilisateur basé sur le bouton cliqué
+            if (option === 'rappel') {
+                chatlog.innerHTML += `<div><b>Vous:</b> Être rappelé par un conseiller</div>`;
+            } else if (option === 'offre') {
+                chatlog.innerHTML += `<div><b>Vous:</b> Souscrire à une offre</div>`;
+            } else if (option === 'rdv') {
+                chatlog.innerHTML += `<div><b>Vous:</b> Prendre rendez-vous avec un technicien</div>`;
+            } else if (option === 'call') {
+                chatlog.innerHTML += `<div><b>Vous:</b> OUI</div>`;
+                // Lancer l'appel directement côté serveur
+                fetch('/call?from=1001&to=1002')
+                .then(() => {
+                chatlog.innerHTML += `<div><b>Bot:</b> Appel en cours... Un conseiller va vous joindre.</div>`;
+            })
+                .catch(() => {
+                chatlog.innerHTML += `<div><b>Bot:</b> Erreur lors du lancement de l'appel.</div>`;
+            });
+            currentChatbotAction = 'none';
+            } else if (option === 'no_assistance') {
+                chatlog.innerHTML += `<div><b>Vous:</b> NON</div>`;
+                chatlog.innerHTML += `<div><b>Bot:</b> Très bien, merci pour votre visite. À bientôt !</div>`;
+                currentChatbotAction = 'none';
+            }
+
+            if (option === 'rappel') {
+                response = "Très bien. Veuillez nous laisser votre numéro (10 chiffres) et un conseiller vous rappellera sous peu.";
+                currentChatbotAction = 'callbackRequest';
+            } else if (option === 'offre') {
+                response = "Nous avons plusieurs offres disponibles. Souhaitez-vous une assistance personnalisée ?";
+                currentChatbotAction = 'offerQuestion';
+            } else if (option === 'rdv') {
+                response = "D’accord. Pour planifier l’intervention, veuillez me donner les informations suivantes séparées par des virgules et dans cet ordre : Votre Nom, la Date (JJ/MM/AAAA), l'Heure (HH:MM), votre Numéro mobile (10 chiffres) et enfin l'Objet de votre demande (Ex: 'Jean Dupont, 29/07/2025, 10:30, 0612345678, Installation Fibre').";
+                currentChatbotAction = 'technicianAppointment';
+            } else if (option === 'call') {
+                chatlog.innerHTML += `<div><b>Vous:</b> OUI</div>`;
+                fetch('/call?from=1001&to=1002')
+                .then(() => {
+                chatlog.innerHTML += `<div><b>Bot:</b> Appel en cours... Un conseiller va vous joindre.</div>`;
+                chatlog.scrollTop = chatlog.scrollHeight;
+            })
+                .catch(() => {
+                chatlog.innerHTML += `<div><b>Bot:</b> Erreur lors du lancement de l'appel.</div>`;
+                chatlog.scrollTop = chatlog.scrollHeight;
+            });
+            currentChatbotAction = 'none';
+            } else if (option === 'no_assistance') {
+                chatlog.innerHTML += `<div><b>Vous:</b> NON</div>`;
+                chatlog.innerHTML += `<div><b>Bot:</b> Très bien, merci pour votre visite. À bientôt !</div>`;
+                currentChatbotAction = 'none';
+            }
+            chatlog.innerHTML += `<div><b>Bot:</b> ${response}</div>`;
+            chatlog.scrollTop = chatlog.scrollHeight;
+        }
+
+        function closeChat() {
+            document.getElementById('chatbot').style.display = 'none';
+        }
+
+        // --- Écouteurs Socket.IO ---
+        socket.on('rappelsClientUpdate', (updatedRappels) => {
+            console.log('Rappels client mis à jour via Socket.IO:', updatedRappels);
+            // Vérifie si la fiche client est active avant de mettre à jour
+            if (document.getElementById('ficheClient').classList.contains('active')) {
+                displayRappels(updatedRappels);
+            }
+        });
+
+        socket.on('rendezVousTechnicienUpdate', (updatedRendezVous) => {
+            console.log('Rendez-vous technicien mis à jour via Socket.IO:', updatedRendezVous);
+            // Vérifie si la fiche client est active avant de mettre à jour
+            if (document.getElementById('ficheClient').classList.contains('active')) {
+                displayRendezVous(updatedRendezVous);
+            }
+        });
+
+        socket.on('messageUpdate', (updatedMessages) => {
+            console.log('Messages généraux mis à jour via Socket.IO:', updatedMessages);
+            // S'assurer que la vue générale est active avant de rafraîchir
+            if (document.getElementById('messagerie').classList.contains('active') && document.getElementById('generalChat').style.display === 'block') {
+                 displayMessages(document.getElementById('messages'), updatedMessages);
+            }
+        });
+
+        socket.on('privateMessageUpdate', (message) => {
+            console.log('Nouveau message privé via Socket.IO:', message);
+            // Rafraîchir la conversation privée seulement si l'utilisateur est concerné et que la vue privée est active
+            if (document.getElementById('messagerie').classList.contains('active') && document.getElementById('privateChat').style.display === 'block' && currentUser) {
+                // Si le message est envoyé par moi au destinataire actuel, ou par le destinataire actuel à moi
+                if (
+                    (message.sender === currentUser && message.recipient === currentPrivateRecipient) ||
+                    (message.sender === currentPrivateRecipient && message.recipient === currentUser)
+                ) {
+                    loadPrivateMessages(currentUser, currentPrivateRecipient);
+                }
+            }
+        });
+
+        socket.on('userRegistered', (data) => {
+            console.log('Nouvel utilisateur enregistré via Socket.IO:', data.username);
+            // Rafraîchir la liste des destinataires privés si on est sur la page de messagerie
+            if (document.getElementById('messagerie').classList.contains('active')) {
+                populatePrivateRecipientSelect();
+            }
+        });
+
+        socket.on('ficheClient', (data) => {
+            console.log('Données Fiche Client reçues via Socket.IO:', data);
+            // Mise à jour de la fiche client si la section est active
+            if (document.getElementById('ficheClient').classList.contains('active')) {
+                document.getElementById('ficheNom').innerText = `${data.prenom || ''} ${data.nom || ''}`;
+                document.getElementById('ficheAdresse').innerText = data.adresse || 'Non spécifiée';
+                document.getElementById('ficheDetails').style.display = 'block';
+                document.getElementById('ficheStatus').innerText = 'Appel détecté !';
+            }
+        });
+
+        // Appeler showPage('home') au chargement initial de la page pour afficher la section d'accueil
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('home');
+            const chatlog = document.getElementById('chatlog');
+            // Afficher le message d'accueil et les options initiales du bot au chargement de la page
+            chatlog.innerHTML += `<div><b>Bot:</b> Bonjour, comment puis-je vous aider ?</div>`;
+            chatlog.innerHTML += `
+                <div id="initial-bot-options" style="margin-top: 10px;">
+                    <button onclick="handleBotOption('rappel')">📞 Être rappelé par un conseiller</button>
+                    <button onclick="handleBotOption('offre')">📄 Souscrire à une offre</button>
+                    <button onclick="handleBotOption('rdv')">🛠️ Prendre rendez-vous avec un technicien</button>
+                </div>
+            `;
+            chatlog.scrollTop = chatlog.scrollHeight;
+        });
+
+    </script>
+</body>
+</html>
