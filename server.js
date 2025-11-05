@@ -13,7 +13,7 @@ const io = new Server(server);
 const PORT = process.env.PORT || 3000;
 
 // --- Configuration AMI (Asterisk Manager Interface) ---
-// Remplacez ces valeurs par les informations de connexion de votre serveur Asterisk/FreePBX
+// valeurs par les informations de connexion de votre serveur Asterisk/FreePBX
 const AMI_HOST = '192.168.100.43'; // IP de votre FreePBX
 const AMI_PORT = 5038;
 const AMI_USERNAME = 'nodejs';
@@ -33,7 +33,7 @@ ami.connect(AMI_USERNAME, AMI_PASSWORD, { host: AMI_HOST, port: AMI_PORT })
         console.error('Erreur de connexion AMI:', err);
     });
 
-// Écoute des événements AMI (exemple pour détecter un appel)
+// Écoute des événements AMI 
 ami.on('managerevent', (evt) => {
     if (evt.event === 'Newchannel' && evt.calleridnum) {
         console.log(`📞 Appel entrant détecté: De ${evt.calleridnum} (${evt.calleridname || 'Inconnu'})`);
@@ -105,7 +105,7 @@ app.post('/register', async (req, res) => {
         const newUser = { username, email, password: hashedPassword };
         users.push(newUser);
         writeJsonFile(USERS_FILE, users);
-        io.emit('userRegistered', { username: newUser.username }); // Notifier les clients qu'un nouvel utilisateur est enregistré
+        io.emit('userRegistered', { username: newUser.username }); // Notifier les clients qu'un nouvel
         res.json({ success: true, message: 'Inscription réussie.' });
     } catch (error) {
         console.error('Erreur lors du hachage du mot de passe:', error);
@@ -135,7 +135,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// --- Route pour obtenir la liste de tous les utilisateurs (pour la messagerie privée) ---
+// --- Route pour la liste de tous les utilisateurs 
 app.get('/api/users', (req, res) => {
     const users = readJsonFile(USERS_FILE);
     // Retourne seulement les noms d'utilisateur pour des raisons de sécurité et de simplicité
@@ -205,7 +205,7 @@ app.post('/chatbot', (req, res) => {
     } else if (message.includes('aide') || message.includes('question')) {
         reply = "Je suis là pour vous aider. N'hésitez pas à me poser vos questions sur nos services ou à demander un rappel.";
     } else {
-        // Fallback ou traitement avancé (ex: appel à une IA externe)
+        // Fallback ou traitement avancé 
         reply = "Désolé, je n'ai pas compris votre demande. Pourriez-vous choisir une option ou reformuler votre question ?";
     }
 
@@ -254,7 +254,7 @@ app.get('/api/rendezvous', (req, res) => {
     res.json(rendezvousList);
 });
 
-// --- Routes API pour la messagerie générale ---
+// Routes API pour la messagerie générale
 app.post('/api/messages', (req, res) => {
     const { sender, content } = req.body;
     if (!sender || !content) {
@@ -275,7 +275,7 @@ app.get('/api/messages', (req, res) => {
     res.json(messages);
 });
 
-// --- Routes API pour la messagerie privée ---
+//  Routes API pour la messagerie privée 
 app.post('/api/private-messages', (req, res) => {
     const { sender, recipient, content } = req.body;
     if (!sender || !recipient || !content) {
